@@ -3,8 +3,8 @@
 require_relative "lib/jekyll_srcset_hook/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "jekyll_srcset_hook"
-  spec.version = JekyllSrcsetHook::VERSION
+  spec.name = "jekyll-srcset-hook"
+  spec.version = Jekyll::SrcsetHook::VERSION
   spec.authors = ["Jocelyn Gaudette"]
   spec.email = ["95389546+juicy-g@users.noreply.github.com"]
 
