@@ -23,7 +23,7 @@ And change them to (based on the config in `_config.yml`):
 
 ## Installation
 
-Add gem 'jekyll-srcset-hook' to the `jekyll_plugins` group in your `Gemfile`:
+Using Bundler, add `gem 'jekyll-srcset-hook'` to the `jekyll_plugins` group in your `Gemfile`:
 
 ```
 source 'https://rubygems.org'
@@ -77,12 +77,12 @@ jekyll-srcset-hook:
 
 ## Usage
 
-`jekyll-srcset-hook` will not modify images with the `src` attribute which do not begin with the `url_endpoint` value so
-it can be used with local images or images from other sources.
+`jekyll-srcset-hook` will not modify images where the `src` attribute does not begin with the `url_endpoint` value so
+it can be used along with existing local images or images from other sources.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jekyll-srcset-hook. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/jekyll-srcset-hook/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/juicy-g/jekyll-srcset-hook. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/jekyll-srcset-hook/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
