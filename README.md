@@ -23,7 +23,7 @@ And change them to (based on the config in `_config.yml`):
 
 ## Installation
 
-Add gem 'jekyll-srcset-hook' to the `jekyll_plugin` group in your `Gemfile`:
+Add gem 'jekyll-srcset-hook' to the `jekyll_plugins` group in your `Gemfile`:
 
 ```
 source 'https://rubygems.org'
