@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/jekyll/srcset/hook/version"
+require_relative "lib/jekyll_srcset_hook/version"
 
 Gem::Specification.new do |spec|
   spec.name = "jekyll_srcset_hook"
-  spec.version = Jekyll::Srcset::Hook::VERSION
+  spec.version = JekyllSrcsetHook::VERSION
   spec.authors = ["Jocelyn Gaudette"]
   spec.email = ["95389546+juicy-g@users.noreply.github.com"]
 
