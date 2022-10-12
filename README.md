@@ -1,6 +1,6 @@
 # Jekyll-srcset-hook
 
-A Jekyll plugin to add srcset and sizes attributes to images without Liquid tags.
+A Jekyll plugin to add srcset and sizes attributes to images without using Liquid tags.
 
 This plugin is intended to be used with media libraries in the cloud like ImageKit.
 
