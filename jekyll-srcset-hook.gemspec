@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["95389546+juicy-g@users.noreply.github.com"]
 
   spec.summary =
-    "A Jekyll plugin to add srcset and sizes attributes to images without Liquid tags."
+    "A Jekyll plugin to add srcset and sizes attributes to images without using Liquid tags."
   spec.homepage = "https://github.com/juicy-g/jekyll-srcset-hook"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
@@ -27,12 +27,12 @@ Gem::Specification.new do |spec|
   spec.files =
     Dir.chdir(__dir__) do
       `git ls-files -z`.split("\x0")
-        .reject do |f|
-          (f == __FILE__) ||
-            f.match(
-              %r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)},
-            )
-        end
+                       .reject do |f|
+        (f == __FILE__) ||
+          f.match(
+            %r{\A(?:(?:bin|test|spec|features)/|\.(?:git|travis|circleci)|appveyor)}
+          )
+      end
     end
   spec.require_paths = ["lib"]
 
