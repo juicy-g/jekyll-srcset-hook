@@ -2,32 +2,27 @@
 
 require "nokogiri"
 
-module JekyllSrcsetHook
-  @@config = {}
+module Srcset
+  @config = {}
 
   def set_config
     proc do |site|
-      @@config = site.config["jekyll-srcset-hook"]
+      @config = site.config["jekyll-srcset-hook"]
 
-      if @@config.nil?
+      if @config.nil?
         Jekyll.logger.warn(
-          "WARNING: jekyll-srcset-hook configuration is not present in _config.yml",
+          "WARNING: jekyll-srcset configuration is not present in _config.yml"
         )
         next
       end
 
-      unless @@config["transformations_widths"].nil? && @@config["sizes"].nil?
+      unless @config["transformations_widths"].nil? && @config["sizes"].nil?
         Jekyll::Hooks.register(:posts, :post_render, &modify_post_output)
         Jekyll::Hooks.register(:pages, :post_render, &modify_page_output)
       end
 
-      unless @@config["posts"].nil?
-        Jekyll::Hooks.register(:posts, :post_render, &modify_post_output)
-      end
-
-      unless @@config["pages"].nil?
-        Jekyll::Hooks.register(:pages, :post_render, &modify_page_output)
-      end
+      Jekyll::Hooks.register(:posts, :post_render, &modify_post_output) unless @config["posts"].nil?
+      Jekyll::Hooks.register(:pages, :post_render, &modify_page_output) unless @config["pages"].nil?
     end
   end
 
@@ -38,22 +33,22 @@ module JekyllSrcsetHook
       fragment
         .xpath(".//img")
         .each do |image|
-          if image[:src].start_with?(
-               @@config["url_endpoint"] || @@config["posts"]["url_endpoint"],
-             )
-            original_image = image
-            original_image = original_image.to_s.gsub!(">", " />")
+          next unless image[:src].start_with?(
+            @config["url_endpoint"] || @config["posts"]["url_endpoint"]
+          )
 
-            image =
-              process_image(
-                image,
-                @@config["transformations_widths"] ||
-                  @@config["posts"]["transformations_widths"],
-                @@config["sizes"] || @@config["posts"]["sizes"],
-              )
+          original_image = image
+          original_image = original_image.to_s.gsub!(">", " />")
 
-            post.output.gsub!(original_image, image)
-          end
+          image =
+            process_image(
+              image,
+              @config["transformations_widths"] ||
+                @config["posts"]["transformations_widths"],
+              @config["sizes"] || @config["posts"]["sizes"]
+            )
+
+          post.output.gsub!(original_image, image)
         end
     end
   end
@@ -66,29 +61,31 @@ module JekyllSrcsetHook
       elements.pop
 
       elements.each do |image|
-        if image[:src].start_with?(
-             @@config["url_endpoint"] || @@config["pages"]["url_endpoint"],
-           )
-          original_image = image
-          original_image = original_image.to_s.gsub!(">", " />")
+        next unless image[:src].start_with?(
+          @config["url_endpoint"] || @config["pages"]["url_endpoint"]
+        )
 
-          image =
-            process_image(
-              image,
-              @@config["transformations_widths"] ||
-                @@config["pages"]["transformations_widths"],
-              @@config["sizes"] || @@config["pages"]["sizes"],
-            )
+        original_image = image
+        original_image = original_image.to_s.gsub!(">", " />")
 
-          page.output.gsub!(original_image, image)
-        end
+        image =
+          process_image(
+            image,
+            @config["transformations_widths"] ||
+              @config["pages"]["transformations_widths"],
+            @config["sizes"] || @config["pages"]["sizes"]
+          )
+
+        page.output.gsub!(original_image, image)
       end
     end
   end
 
   def process_image(image, transformations, sizes)
     srcset_value = ""
-    transformations.each { |t_w| srcset_value += "#{image[:src]}#{t_w}, " }
+    transformations.each do |t_w|
+      srcset_value += "#{image[:src]}#{t_w}, "
+    end
     # remove the extra ", " at the end of srcset_value
     srcset_value.chomp!(", ")
     # add the attributes to the image
