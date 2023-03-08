@@ -6,13 +6,13 @@ This plugin is intended to be used with media libraries in the cloud like ImageK
 
 For example, it will take images in posts written in Markdown:
 
-```
+```markdown
 ![alt text](https://ik.imagekit.io/your_imagekit_id/image.jpg)
 ```
 
 And change them to (based on the config in `_config.yml`):
 
-```
+```html
 <img src="https://ik.imagekit.io/your_imagekit_id/image.jpg" alt="alt text"
      srcset="https://ik.imagekit.io/your_imagekit_id/image.jpg?tr=w-300 300w,
              https://ik.imagekit.io/your_imagekit_id/image.jpg?tr=w-600 600w,
@@ -25,7 +25,7 @@ And change them to (based on the config in `_config.yml`):
 
 Using Bundler, add `gem 'jekyll-srcset-hook'` to the `jekyll_plugins` group in your `Gemfile`:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'jekyll'
@@ -41,7 +41,7 @@ Then run `bundle` to install the gem.
 
 In `_config.yml` add one of the configuration below. By default, `jekyll-srcset-hook` will apply to both posts and pages:
 
-```
+```yaml
 jekyll-srcset-hook:
     url_endpoint: https://ik.imagekit.io/your_imagekit_id/
     transformations_widths: ["?tr=w-300 300w", "?tr=w-600 600w", "?tr=w-900 900w"]
@@ -50,7 +50,7 @@ jekyll-srcset-hook:
 
 Individual configuration for images in posts and pages can be provided independently using the same URL endpoint:
 
-```
+```yaml
 jekyll-srcset-hook:
     url_endpoint: https://ik.imagekit.io/your_imagekit_id/
     posts:
@@ -63,7 +63,7 @@ jekyll-srcset-hook:
 
 Or with separate endpoints:
 
-```
+```yaml
 jekyll-srcset-hook:
     posts:
         url_endpoint: https://ik.imagekit.io/your_imagekit_id1/
